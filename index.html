@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1115">
+<meta name="description" content="Theo dõi lịch tập calisthenics: giáo án Push/Pull/Legs, tick từng hiệp, bấm giờ nghỉ, kỷ lục cá nhân.">
+<title>Lịch Tập Calisthenics</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Calisthenics">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">
+      <span class="brand-icon">💪</span>
+      <span class="brand-name">Lịch Tập <span class="brand-accent">Calis</span></span>
+    </div>
+    <button id="btn-settings" class="icon-btn" aria-label="Cài đặt">⚙️</button>
+  </header>
+
+  <main id="views">
+    <section id="view-home" class="view"></section>
+    <section id="view-library" class="view hidden"></section>
+    <section id="view-progress" class="view hidden"></section>
+    <section id="view-calendar" class="view hidden"></section>
+    <section id="view-programs" class="view hidden"></section>
+    <section id="view-settings" class="view hidden"></section>
+  </main>
+
+  <nav id="bottomnav">
+    <button data-view="home" class="nav-btn active"><span class="nav-ico">🏠</span><span>Trang chủ</span></button>
+    <button data-view="library" class="nav-btn"><span class="nav-ico">📚</span><span>Bài tập</span></button>
+    <button data-view="progress" class="nav-btn"><span class="nav-ico">📈</span><span>Tiến bộ</span></button>
+    <button data-view="calendar" class="nav-btn"><span class="nav-ico">📅</span><span>Lịch</span></button>
+    <button data-view="programs" class="nav-btn"><span class="nav-ico">🗂️</span><span>Giáo án</span></button>
+  </nav>
+</div>
+
+<!-- Màn hình buổi tập đang diễn ra -->
+<div id="workout-overlay" class="overlay hidden">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div>
+        <div class="sheet-title" id="wo-title">Buổi tập</div>
+        <div class="sheet-sub" id="wo-timer">00:00</div>
+      </div>
+      <button id="wo-close" class="icon-btn" aria-label="Thoát">✕</button>
+    </div>
+    <div id="wo-list" class="wo-list"></div>
+    <button id="wo-finish" class="btn-primary btn-block">Hoàn thành buổi tập</button>
+  </div>
+</div>
+
+<!-- Flow hướng dẫn khởi động / giãn cơ -->
+<div id="guide-overlay" class="overlay hidden">
+  <div class="timer-card" style="width:min(92vw,420px)">
+    <div class="timer-label" id="guide-title">Khởi động</div>
+    <div class="sheet-sub" id="guide-step">Động tác 1/6</div>
+    <div style="font-size:19px;font-weight:800;margin:8px 0" id="guide-name"></div>
+    <div class="timer-ring"><span id="guide-num">45</span></div>
+    <div class="timer-ex" id="guide-tip" style="text-align:left;min-height:40px"></div>
+    <button id="guide-next" class="btn-primary btn-block">Xong, qua động tác tiếp ▶</button>
+    <button id="guide-exit" class="btn-ghost btn-block">Kết thúc sớm</button>
+  </div>
+</div>
+
+<!-- Đồng hồ nghỉ giữa hiệp -->
+<div id="timer-modal" class="overlay hidden">
+  <div class="timer-card">
+    <div class="timer-label">Nghỉ giữa hiệp</div>
+    <div class="timer-ring"><span id="timer-num">90</span></div>
+    <div class="timer-ex" id="timer-ex"></div>
+    <div class="timer-row">
+      <button id="timer-minus" class="btn-ghost">−15s</button>
+      <button id="timer-plus" class="btn-ghost">+15s</button>
+    </div>
+    <button id="timer-skip" class="btn-primary btn-block">Bỏ qua, tập tiếp</button>
+  </div>
+</div>
+
+<!-- Hộp thoại chung -->
+<div id="modal" class="overlay hidden">
+  <div class="sheet modal-sheet">
+    <div class="sheet-title" id="modal-title"></div>
+    <div id="modal-body"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<div id="toast" class="hidden"></div>
+<input type="file" id="import-file" accept="application/json,.json" class="hidden">
+
+<script src="app.js"></script>
+</body>
+</html>
